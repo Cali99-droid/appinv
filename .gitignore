@@ -1,0 +1,9 @@
+# Laravel
+/appogtise/vendor/
+/appogtise/node_modules/
+/appogtise/public/storage/
+
+# React
+/frontend/node_modules/
+/frontend/build/
+
