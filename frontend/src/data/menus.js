@@ -4,7 +4,9 @@ import {
   faTable,
   faLock,
   faNoteSticky,
-  faNotdef,
+  faAppleWhole,
+  faComputer,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 const initMenu = [
@@ -14,46 +16,46 @@ const initMenu = [
     icon: faTachometer,
   },
   {
-    label: "Label",
+    label: "Inventario",
   },
   {
-    label: "Blank",
-    path: "/blank",
-    icon: faPage4,
+    label: "Software",
+    path: "/software",
+    icon: faAppleWhole,
   },
   {
-    label: "404",
-    path: "/404",
-    icon: faNotdef,
+    label: "Hardware",
+    path: "/hardware",
+    icon: faComputer,
   },
 
   {
-    label: "Tabel dan Form",
+    label: "Admin",
   },
   {
-    label: "Form",
+    label: "Users",
     path: "/form",
-    icon: faWindows,
+    icon: faUser,
   },
-  {
-    label: "Tabel",
-    path: "/table",
-    icon: faTable,
-  },
+  // {
+  //   label: "Tabel",
+  //   path: "/table",
+  //   icon: faTable,
+  // },
 
-  {
-    label: "Otentikasi",
-  },
-  {
-    label: "Login",
-    path: "/auth/login",
-    icon: faLock,
-  },
-  {
-    label: "Register",
-    path: "/auth/register",
-    icon: faNoteSticky,
-  },
+  // {
+  //   label: "Otentikasi",
+  // },
+  // {
+  //   label: "Login",
+  //   path: "/auth/login",
+  //   icon: faLock,
+  // },
+  // {
+  //   label: "Register",
+  //   path: "/auth/register",
+  //   icon: faNoteSticky,
+  // },
 ];
 
 export default initMenu;

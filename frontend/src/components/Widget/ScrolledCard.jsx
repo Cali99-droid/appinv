@@ -5,15 +5,15 @@ function ScrolledCard({ data, ...props }) {
     <div className={`scrolledCard ${data.color} text-slate-50 flex flex-col`}>
       <h1 className="pb-3 font-semibold">{data.title}</h1>
       <div className="text-[0.6rem] text-slate-700 font-semibold">
-        {data.date} (YtD)
+        {data.date}
       </div>
-      <div className="text-medium">OS:{data.os} M</div>
-      <div className="flex flex-row justify-between items-center gap-3">
+      <div className="text-medium">Cantidad:{data.os} </div>
+      {/* <div className="flex flex-row justify-between items-center gap-3">
         <span className="text-[0.7rem] font-semibold">GS: {data.gs}M</span>
         <span className="text-xs px-2 py-1 rounded-full bg-white">
           {data.percentage}%
         </span>
-      </div>
+      </div> */}
     </div>
   );
 }

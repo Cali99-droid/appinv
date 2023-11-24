@@ -48,7 +48,7 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-function Blank() {
+function Hardware() {
   const [sidebarToggle] = useOutletContext();
   return (
     <>
@@ -60,9 +60,9 @@ function Blank() {
           <div className="border w-full border-gray-200 bg-white py-4 px-6 rounded-md">
             <div className="flex justify-between pb-2">
               <Typography fontWeight={"bold"} variant={"h6"}>
-                Inventario Software
+                Inventario Hardware
               </Typography>
-              <Link to={"/software-nuevo"}>
+              <Link to={"/hardware-nuevo"}>
                 <button className="bg-emerald-600 text-gray-100 px-3 py-2 rounded-lg shadow-lg text-sm">
                   Nuevo
                 </button>
@@ -88,4 +88,4 @@ function Blank() {
   );
 }
 
-export default Blank;
+export default Hardware;

@@ -48,7 +48,7 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-function Blank() {
+function Software() {
   const [sidebarToggle] = useOutletContext();
   return (
     <>
@@ -88,4 +88,4 @@ function Blank() {
   );
 }
 
-export default Blank;
+export default Software;
