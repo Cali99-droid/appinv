@@ -7,20 +7,20 @@ import Typography from "@mui/material/Typography";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
-    field: "firstName",
-    headerName: "First name",
+    field: "articulo",
+    headerName: "Artículo",
     width: 150,
     editable: true,
   },
   {
-    field: "lastName",
-    headerName: "Last name",
+    field: "serie",
+    headerName: "N° Serie",
     width: 150,
     editable: true,
   },
   {
-    field: "age",
-    headerName: "Age",
+    field: "ubicacion",
+    headerName: "Ubicación",
     type: "number",
     width: 110,
     editable: true,
@@ -37,7 +37,7 @@ const columns = [
 ];
 
 const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
+  { id: 1, articulo: "PC DELL", serie: "RG5676TH", ubicacion: "Ciencias" },
   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
   { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
