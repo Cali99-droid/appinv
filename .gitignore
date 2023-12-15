@@ -2,7 +2,7 @@
 /appogtise/vendor/
 /appogtise/node_modules/
 /appogtise/public/storage/
-
+.env
 # React
 /frontend/node_modules/
 /frontend/build/

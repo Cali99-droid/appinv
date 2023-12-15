@@ -3,19 +3,35 @@ import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import clienteAxios from "../../../config/axios";
+import { useAuth } from "../../../hooks/useAuth";
 function LoginIndex() {
+  const { login } = useAuth({
+    middleware: "guest",
+    url: "/oficina",
+  });
   const navigate = useNavigate();
+  const [errores, setErrores] = useState([]);
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     setError(false);
+    const userData = {
+      email,
+      password,
+    };
     console.log(email);
     console.log(password);
-    setLoading(true);
-    navigate("/");
+
+    login(userData, setErrores, setLoading);
+    console.log(errores);
+    // console.log(userd, );
+
+    // navigate("/");
   };
   const LoginImage =
     "https://edp.raincode.my.id/static/media/login.cc0578413db10119a7ff.png";
@@ -36,30 +52,38 @@ function LoginIndex() {
                   Ingrese con su cuenta
                 </h1>
                 <span className="text-sm">
-                  Sistema de inventario patrimonial de la Oficina General de Tecnologias de la Información
+                  Sistema de inventario patrimonial de la Oficina General de
+                  Tecnologias de la Información
                 </span>
               </div>
             </div>
           </div>
+
           {/* Login Section */}
           <div className="flex flex-col md:flex-1 items-center justify-center">
             <div className="loginWrapper flex flex-col w-full lg:px-36 md:px-8 px-8 md:py-8">
               {/* Login Header Text */}
               <div className="hidden md:block font-medium self-center text-xl sm:text-3xl text-gray-800">
-               OGTISE
+                OGTISE
               </div>
-             
+
               {/* Sparator */}
               <div className="hidden md:block relative mt-10 h-px bg-gray-300">
                 <div className="absolute left-0 top-0 flex justify-center w-full -mt-2">
                   <span className="bg-white px-4 text-xs text-gray-500 uppercase">
-                    Ingrese con su e-mail 
+                    Ingrese con su e-mail
                   </span>
                 </div>
               </div>
-
+              <div>
+                {errores
+                  ? errores.map((error, i) => <p key={i}>{error}</p>)
+                  : null}
+              </div>
               <div className="md:hidden block my-4">
-                <h1 className="text-2xl font-semibold">Sistema de inventario - OGITSE</h1>
+                <h1 className="text-2xl font-semibold">
+                  Sistema de inventario - OGITSE
+                </h1>
               </div>
 
               {/* Login Form */}
@@ -121,7 +145,7 @@ function LoginIndex() {
                         }}
                         className="inline-flex font-semibold text-xs sm:text-sm text-blue-500 hover:text-blue-700"
                       >
-                        Olvidó su  password?
+                        Olvidó su password?
                       </Link>
                     </div>
                   </div>

@@ -8,12 +8,13 @@ import GuestLayout from "./components/Layout/GuestLayout";
 import Login from "./pages/auth/Login";
 import Blank from "./pages/Blank";
 import NotFound from "./pages/NotFound";
-import Form from "./pages/Form";
+
 import RegisterIndex from "./pages/auth/Register";
 import NewSoftware from "./pages/NuevoSoftware";
 import Software from "./pages/Software";
 import Hardware from "./pages/Hardware";
 import NewHardware from "./pages/NuevoHardware";
+import NewUser from "./pages/NewUser";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
         <Route path="/software" element={<Software />}></Route>
         <Route path="/hardware" element={<Hardware />}></Route>
         <Route path="/404" element={<NotFound />}></Route>
-        <Route path="/form" element={<Form />}></Route>
+        <Route path="/new-user" element={<NewUser />}></Route>
         <Route path="/profile" element={<Blank />}></Route>
         <Route path="/software-nuevo" element={<NewSoftware />}></Route>
         <Route path="/hardware-nuevo" element={<NewHardware />}></Route>
