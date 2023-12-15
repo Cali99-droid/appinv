@@ -2,15 +2,15 @@
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import clienteAxios from "../../../config/axios";
+import { Link } from "react-router-dom";
+
 import { useAuth } from "../../../hooks/useAuth";
 function LoginIndex() {
   const { login } = useAuth({
     middleware: "guest",
     url: "/",
   });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [errores, setErrores] = useState([]);
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");

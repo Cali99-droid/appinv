@@ -29,6 +29,10 @@ function App() {
         <Route path="/new-user" element={<NewUser />}></Route>
         <Route path="/profile" element={<Blank />}></Route>
         <Route path="/software-nuevo" element={<NewSoftware />}></Route>
+        <Route
+          path="/software-actualizar/:id"
+          element={<NewSoftware />}
+        ></Route>
         <Route path="/hardware-nuevo" element={<NewHardware />}></Route>
       </Route>
       <Route path="/auth" element={<GuestLayout />}>

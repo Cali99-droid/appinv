@@ -22,7 +22,7 @@ export const useAuth = ({ middleware, url }) => {
     { refreshInterval: 10000 }
   );
   const user = data;
-  console.log(data);
+
   // const oficina = data?.oficina;
 
   const login = async (datos, setErrores, setLoading) => {

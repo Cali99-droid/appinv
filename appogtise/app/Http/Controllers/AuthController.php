@@ -73,11 +73,11 @@ class AuthController extends Controller
 
     public function getUser(Request $request)
     {
-        $user =  $request->user();
-        $oficina = Oficina::where('id', '=', $user->oficina_id)->first();
-        return [
-            'user' => $user,
-            'oficina' =>  $oficina
-        ];
+        // $user =  $request->user();
+        // $oficina = Oficina::where('id', '=', $user->oficina_id)->first();
+        // return [
+        //     'user' => $user,
+        //     'oficina' =>  $oficina
+        // ];
     }
 }
