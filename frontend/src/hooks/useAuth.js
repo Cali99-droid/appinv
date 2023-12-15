@@ -21,8 +21,9 @@ export const useAuth = ({ middleware, url }) => {
         }),
     { refreshInterval: 10000 }
   );
-  const user = data?.user;
-  const oficina = data?.oficina;
+  const user = data;
+  console.log(data);
+  // const oficina = data?.oficina;
 
   const login = async (datos, setErrores, setLoading) => {
     try {
@@ -67,6 +68,7 @@ export const useAuth = ({ middleware, url }) => {
   };
 
   useEffect(() => {
+    console.log("llego eff", url);
     if (middleware === "guest" && url && user) {
       navigate(url);
     }
@@ -90,7 +92,7 @@ export const useAuth = ({ middleware, url }) => {
     registro,
     logout,
     user,
-    oficina,
+
     error,
   };
 };

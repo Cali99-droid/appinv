@@ -8,7 +8,7 @@ import { useAuth } from "../../../hooks/useAuth";
 function LoginIndex() {
   const { login } = useAuth({
     middleware: "guest",
-    url: "/oficina",
+    url: "/",
   });
   const navigate = useNavigate();
   const [errores, setErrores] = useState([]);
