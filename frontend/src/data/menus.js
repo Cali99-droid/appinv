@@ -34,7 +34,7 @@ const initMenu = [
   },
   {
     label: "Users",
-    path: "/new-user",
+    path: "/users",
     icon: faUser,
   },
   // {

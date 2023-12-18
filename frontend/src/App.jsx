@@ -9,12 +9,15 @@ import Login from "./pages/auth/Login";
 import Blank from "./pages/Blank";
 import NotFound from "./pages/NotFound";
 
-import RegisterIndex from "./pages/auth/Register";
 import NewSoftware from "./pages/NuevoSoftware";
 import Software from "./pages/Software";
 import Hardware from "./pages/Hardware";
 import NewHardware from "./pages/NuevoHardware";
 import NewUser from "./pages/NewUser";
+
+import Mantenimientos from "./pages/Mantenimientos";
+import NewMantenimiento from "./pages/NuevoMantenimiento";
+import Users from "./pages/Users";
 
 function App() {
   return (
@@ -27,17 +30,32 @@ function App() {
         <Route path="/hardware" element={<Hardware />}></Route>
         <Route path="/404" element={<NotFound />}></Route>
         <Route path="/new-user" element={<NewUser />}></Route>
+        <Route path="/update-user/:id" element={<NewUser />}></Route>
+        <Route path="/users" element={<Users />}></Route>
         <Route path="/profile" element={<Blank />}></Route>
         <Route path="/software-nuevo" element={<NewSoftware />}></Route>
         <Route
           path="/software-actualizar/:id"
           element={<NewSoftware />}
         ></Route>
+
         <Route path="/hardware-nuevo" element={<NewHardware />}></Route>
+        <Route
+          path="/hardware-actualizar/:id"
+          element={<NewHardware />}
+        ></Route>
+        <Route
+          path="/hardware-mantenimiento/:id"
+          element={<Mantenimientos />}
+        ></Route>
+        <Route
+          path="/add-mantenimiento/:idEquipo/:id"
+          element={<NewMantenimiento />}
+        ></Route>
       </Route>
       <Route path="/auth" element={<GuestLayout />}>
         <Route path="/auth/login" element={<Login />}></Route>
-        <Route path="/auth/register" element={<RegisterIndex />}></Route>
+        <Route path="/auth/register" element={<NewUser />}></Route>
       </Route>
     </Routes>
   );

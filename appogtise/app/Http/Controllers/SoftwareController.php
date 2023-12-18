@@ -50,8 +50,6 @@ class SoftwareController extends Controller
         //
         return [
             'software' => $software,
-
-
         ];
     }
 

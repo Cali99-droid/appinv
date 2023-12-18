@@ -2,9 +2,15 @@
 
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashController;
+use App\Http\Controllers\HardwareController;
+use App\Http\Controllers\MantenimientoController;
 use App\Http\Controllers\SoftwareController;
+use App\Http\Controllers\UserController;
+use App\Models\Hardware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +25,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/software', SoftwareController::class);
+    Route::apiResource('/hardware', HardwareController::class);
     Route::apiResource('/areas', AreaController::class);
-
-
-
-
+    Route::apiResource('/users', UserController::class);
+    Route::apiResource('/mantenimiento', MantenimientoController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/dash', [DashController::class, 'getData']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

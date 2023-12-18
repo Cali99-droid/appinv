@@ -1,8 +1,7 @@
 import {
-  faBell,
+  faAppleAlt,
+  faComputer,
   faHome,
-  faMessage,
-  faSignOut,
   faUserAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,35 +14,35 @@ function Index() {
   const menus = useMemo(
     () => [
       {
-        label: "Home",
+        label: "Dash",
         icon: faHome,
         link: "/",
         dis: "translate-x-0",
       },
       {
-        label: "Notifikasi",
-        icon: faBell,
-        link: "/table",
+        label: "Hardware",
+        icon: faAppleAlt,
+        link: "/software",
         dis: "translate-x-16",
       },
       {
-        label: "Pesan",
-        icon: faMessage,
-        link: "/form",
+        label: "Hardware",
+        icon: faComputer,
+        link: "/hardware",
         dis: "translate-x-32",
       },
       {
-        label: "Profile",
+        label: "Users",
         icon: faUserAlt,
-        link: "/profile",
+        link: "/users",
         dis: "translate-x-48",
       },
-      {
-        label: "Keluar",
-        icon: faSignOut,
-        link: "/auth/login",
-        dis: "translate-x-64",
-      },
+      // {
+      //   label: "Keluar",
+      //   icon: faSignOut,
+      //   link: "/auth/login",
+      //   dis: "translate-x-64",
+      // },
     ],
     []
   );

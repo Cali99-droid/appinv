@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar/Index";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFloppyDisk, faPhone } from "@fortawesome/free-solid-svg-icons";
 import clienteAxios from "../config/axios";
-
+import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { CircularProgress } from "@mui/material";
 function NewUser() {
+  const { id } = useParams();
+  const token = localStorage.getItem("AUTH_TOKEN");
   const [userData, setUserData] = useState({
     id: null,
     name: "",
@@ -49,21 +53,27 @@ function NewUser() {
       console.log("Datos del usuario:", userData);
       //   console.log(userData.id);
       try {
-        // if(userData.id){
-        //   const resp = await clienteAxios.put(`/api/users/${userData.id}`,userData,{
-        //     headers: {
-        //       Authorization: `Bearer ${token}`,
-        //     },
-        //   })
-        //   console.log(resp)
-        //   toast.success('Actualizado correctamente');
-        //   onClose();
-        //   return;
-        // }
+        if (userData.id) {
+          const resp = await clienteAxios.put(
+            `/api/users/${userData.id}`,
+            userData,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          console.log(resp);
+          toast.success("Actualizado correctamente");
+          // onClose();
+          return;
+        }
         const resp = await clienteAxios.post("/api/registro", userData);
         console.log(resp);
+        toast.success("Creado correctamente");
         console.log("entro");
-        // setErrors({});
+
+        navigate("/users");
         // toast.success('Creado correctamente');
         // onClose();
         // console.log(resp)
@@ -79,6 +89,46 @@ function NewUser() {
       setErrors(newErrors);
     }
   };
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    // Si estás en modo de actualización, obtén los datos del servidor y establece los valores iniciales del formulario
+    if (id) {
+      setLoading(true);
+      // Agrega aquí la lógica para obtener los datos del servidor y establecer los valores iniciales de formik.setValues
+      // Puedes usar axios, fetch u otra biblioteca para hacer la solicitud HTTP
+      // Supongamos que getDataFromServer es una función que obtiene los datos del servidor
+      const fetchData = async () => {
+        try {
+          clienteAxios(`/api/users/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }).then((response) => {
+            console.log(response.data.user[0]);
+            setLoading(false);
+            setUserData(response.data.user[0]);
+          });
+          // const data = await getDataFromServer(id);
+          // formik.setValues(data);
+        } catch (error) {
+          console.error("Error al obtener datos del servidor:", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [id]);
+
+  const navigate = useNavigate();
+  if (loading) {
+    return (
+      <main className="flex  h-full w-full">
+        <div className="px-2 mx-auto mainCard">
+          <CircularProgress />
+        </div>
+      </main>
+    );
+  }
   return (
     <>
       <main className="h-full">
@@ -86,7 +136,24 @@ function NewUser() {
 
         {/* Main Content */}
         <div className="mainCard">
+          <ToastContainer />
           <div className="border w-full border-gray-200 bg-white py-4 px-6 rounded-md">
+            <div className="mb-2 ">
+              <div className=" flex justify-between">
+                <p>Guardar Usuario </p>
+
+                <button
+                  onClick={() => navigate(`/users`)}
+                  className="bg-orange-400 border-orange-600 text-gray-100 px-3 py-2 rounded-lg shadow-lg text-sm flex gap-2 items-center"
+                >
+                  <div>
+                    <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+                  </div>
+                  <span>Volver</span>
+                </button>
+              </div>{" "}
+              <hr />
+            </div>
             <form onSubmit={handleSubmit}>
               {/* Form Default */}
               <div>
@@ -98,11 +165,12 @@ function NewUser() {
                   type="text"
                   name="name"
                   onChange={handleChange}
+                  value={userData.name}
                   // onChange={(e) => setEmail(e.target.value)}
                   className="text-sm placeholder-gray-500 px-4 rounded-lg border border-gray-200 w-full md:py-2 py-3 focus:outline-none focus:border-emerald-400 mt-1"
-                  placeholder="nombre de usuario"
+                  placeholder="Nombre de usuario"
                 />
-                <p>{errors.name}</p>
+                <div className="text-red-500 text-sm mt-1">{errors.name}</div>
               </div>
               <div>
                 <label htmlFor="email" className="text-sm text-gray-600">
@@ -112,17 +180,21 @@ function NewUser() {
                   id="email"
                   type="email"
                   name="email"
+                  value={userData.email}
                   onChange={handleChange}
                   // onChange={(e) => setEmail(e.target.value)}
                   className="text-sm placeholder-gray-500 px-4 rounded-lg border border-gray-200 w-full md:py-2 py-3 focus:outline-none focus:border-emerald-400 mt-1"
-                  placeholder="Email usuario"
+                  placeholder="Email User"
                 />
-                <p>{errors.email}</p>
+                <div className="text-red-500 text-sm mt-1">{errors.email}</div>
               </div>
               <div>
                 <label htmlFor="password" className="text-sm text-gray-600">
                   Password
                 </label>
+                <div className="text-gray-500 text-xs mt-1">
+                  {id ? "Dejar en blanco si no va cambiar" : ""}
+                </div>
                 <input
                   id="password"
                   type="password"
@@ -130,9 +202,11 @@ function NewUser() {
                   onChange={handleChange}
                   // onChange={(e) => setEmail(e.target.value)}
                   className="text-sm placeholder-gray-500 px-4 rounded-lg border border-gray-200 w-full md:py-2 py-3 focus:outline-none focus:border-emerald-400 mt-1"
-                  placeholder="password user"
+                  placeholder="Password User"
                 />
-                <p>{errors.password}</p>
+                <div className="text-red-500 text-sm mt-1">
+                  {errors.password}
+                </div>
               </div>
 
               {/* Form Large */}
@@ -177,7 +251,7 @@ function NewUser() {
                   className="bg-emerald-600 text-gray-100 px-3 py-2 rounded-lg shadow-lg text-sm"
                   type="submit"
                 >
-                  Primary Button
+                  Guardar
                 </button>
 
                 {/* <button className="text-emerald-600 border border-gray-100 px-3 py-2 rounded-lg shadow-lg text-sm">

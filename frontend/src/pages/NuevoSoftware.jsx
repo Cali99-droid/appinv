@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../hooks/useAuth";
+import { CircularProgress } from "@mui/material";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faFloppyDisk, faPhone } from "@fortawesome/free-solid-svg-icons";
@@ -82,7 +83,7 @@ function NewSoftware() {
       }
     },
   });
-
+  const [load, setLoad] = useState(false);
   useEffect(() => {
     clienteAxios("/api/areas", {
       headers: {
@@ -94,6 +95,7 @@ function NewSoftware() {
 
     // Si estás en modo de actualización, obtén los datos del servidor y establece los valores iniciales del formulario
     if (id) {
+      setLoad(true);
       // Agrega aquí la lógica para obtener los datos del servidor y establecer los valores iniciales de formik.setValues
       // Puedes usar axios, fetch u otra biblioteca para hacer la solicitud HTTP
       // Supongamos que getDataFromServer es una función que obtiene los datos del servidor
@@ -106,17 +108,28 @@ function NewSoftware() {
           }).then((response) => {
             formik.setValues(response.data.software);
             console.log(response.data.software);
+            setLoad(false);
           });
           // const data = await getDataFromServer(id);
           // formik.setValues(data);
         } catch (error) {
           console.error("Error al obtener datos del servidor:", error);
+          setLoad(false);
         }
       };
 
       fetchData();
     }
   }, [id]);
+  if (load) {
+    return (
+      <main className="flex  h-full w-full">
+        <div className="px-2 mx-auto mainCard">
+          <CircularProgress />
+        </div>
+      </main>
+    );
+  }
   return (
     <>
       <main className="h-full">
@@ -283,7 +296,7 @@ function NewSoftware() {
                     htmlFor="responsable"
                     className="text-sm text-gray-600"
                   >
-                    Serial - responsable
+                    Responsable
                   </label>
                   <input
                     id="responsable"
@@ -297,7 +310,7 @@ function NewSoftware() {
                         ? "border-red-500"
                         : "border-gray-200"
                     } w-full md:py-2 py-3 focus:outline-none focus:border-emerald-400 mt-1`}
-                    placeholder="responsable"
+                    placeholder="Responsable"
                   />
                   {formik.errors.responsable && formik.touched.responsable && (
                     <div className="text-red-500 text-sm mt-1">

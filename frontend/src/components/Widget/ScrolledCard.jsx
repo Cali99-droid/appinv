@@ -7,13 +7,13 @@ function ScrolledCard({ data, ...props }) {
       <div className="text-[0.6rem] text-slate-700 font-semibold">
         {data.date}
       </div>
-      <div className="text-medium">Cantidad:{data.os} </div>
-      {/* <div className="flex flex-row justify-between items-center gap-3">
-        <span className="text-[0.7rem] font-semibold">GS: {data.gs}M</span>
+      <div className="text-medium">{data.os} </div>
+      <div className="flex flex-row justify-between items-center gap-3">
+        <span className="text-[0.7rem] font-semibold">{data.gs}</span>
         <span className="text-xs px-2 py-1 rounded-full bg-white">
-          {data.percentage}%
+          {data.percentage}
         </span>
-      </div> */}
+      </div>
     </div>
   );
 }

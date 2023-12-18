@@ -75,11 +75,13 @@ function LoginIndex() {
                   </span>
                 </div>
               </div>
-              <div>
+
+              <div className="text-red-500 text-sm mt-1">
                 {errores
                   ? errores.map((error, i) => <p key={i}>{error}</p>)
                   : null}
               </div>
+
               <div className="md:hidden block my-4">
                 <h1 className="text-2xl font-semibold">
                   Sistema de inventario - OGITSE
@@ -87,7 +89,7 @@ function LoginIndex() {
               </div>
 
               {/* Login Form */}
-              <div className="md:mt-10 mt-4">
+              <div className="md:mt-10 mt-2">
                 <form onSubmit={handleSubmit}>
                   {/* Username */}
                   <div className="flex flex-col mb-3">
@@ -137,7 +139,7 @@ function LoginIndex() {
 
                   {/* Forgot Password Link */}
                   <div className="flex items-center mb-6 -mt-2 md:-mt-4">
-                    <div className="flex ml-auto">
+                    {/* <div className="flex ml-auto">
                       <Link
                         to=""
                         onClick={(e) => {
@@ -146,8 +148,8 @@ function LoginIndex() {
                         className="inline-flex font-semibold text-xs sm:text-sm text-blue-500 hover:text-blue-700"
                       >
                         Olvidó su password?
-                      </Link>
-                    </div>
+                      </Link> 
+                    </div>*/}
                   </div>
 
                   {/* Button Login */}
@@ -158,7 +160,7 @@ function LoginIndex() {
                       className="flex items-center justify-center focus:outline-none text-white text-sm bg-blue-500 hover:bg-blue-700 rounded-lg md:rounded md:py-2 py-3 w-full transition duration-150 ease-in"
                     >
                       <span className="mr-2 md:uppercase">
-                        {loading ? "Processing...." : "Ingresar"}
+                        {loading ? "Ingresando...." : "Ingresar"}
                       </span>
                     </button>
                   </div>

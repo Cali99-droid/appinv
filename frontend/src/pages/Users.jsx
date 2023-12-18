@@ -6,26 +6,36 @@ import {
   esES,
 } from "@mui/x-data-grid";
 import Navbar from "../components/Navbar/Index";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import clienteAxios from "../config/axios";
 
 import { useAuth } from "../hooks/useAuth";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAdd,
+  faArrowAltCircleLeft,
+  faEdit,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-function Software() {
+function Users() {
   const navigate = useNavigate();
   const [sidebarToggle] = useOutletContext();
   const { user } = useAuth({ middleware: "auth" });
-
+  const { id } = useParams();
   const [datos, setDatos] = useState([]);
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("AUTH_TOKEN");
   useEffect(() => {
     setLoading(true);
-    clienteAxios("/api/software", {
+    clienteAxios("/api/users", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -40,56 +50,19 @@ function Software() {
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
-      field: "nombre",
-      headerName: "Artículo",
+      field: "name",
+      headerName: "Nombre",
       width: 150,
       editable: true,
     },
     {
-      field: "descripcion",
-      headerName: "Descripcion",
+      field: "email",
+      headerName: "Email",
       width: 150,
-    },
-    {
-      field: "fabricante",
-      headerName: "Fabricante",
-      width: 150,
-    },
-    {
-      field: "fechaInstalacion",
-      headerName: "Fecha de instalación",
-      width: 150,
-    },
-    {
-      field: "tipoLicencia",
-      headerName: "Tipo de lincencia",
-      width: 150,
-    },
-    {
-      field: "ubicacion",
-      headerName: "Ubicación",
-
-      width: 110,
-    },
-    {
-      field: "observacion",
-      headerName: "Observacion",
-      width: 110,
-    },
-    {
-      field: "responsable",
-      headerName: "Responsable",
-      width: 110,
-    },
-    {
-      field: "area",
-      headerName: "Area",
-      width: 110,
-      valueGetter: (params) => params.row.area?.nombre,
     },
     {
       field: "actions",
-      headerName: "Acciones",
+      headerName: "Editar",
       sortable: false,
       type: "actions",
       width: 110,
@@ -99,7 +72,7 @@ function Software() {
           icon={<FontAwesomeIcon icon={faEdit} />}
           label="Editar"
           onClick={() => {
-            navigate(`/software-actualizar/${params.row.id}`);
+            navigate(`/update-user/${params.row.id}`);
           }}
         />,
         <GridActionsCellItem
@@ -107,16 +80,16 @@ function Software() {
           icon={<FontAwesomeIcon icon={faTrash} />}
           label="Eliminar"
           onClick={() => {
-            deleteSoftware(params.row.id);
+            deleteUser(params.row.id);
           }}
         />,
       ],
     },
   ];
 
-  const deleteSoftware = async (id) => {
+  const deleteUser = async (id) => {
     setDatos(datos.filter((d) => d.id !== id));
-    const { data } = await clienteAxios.delete(`/api/software/${id}`, {
+    const { data } = await clienteAxios.delete(`/api/users/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -124,6 +97,34 @@ function Software() {
 
     toast.success("Eliminado correctamente");
   };
+
+  // const [equipo, setEquipo] = useState({});
+  // useEffect(() => {
+  //   // Si estás en modo de actualización, obtén los datos del servidor y establece los valores iniciales del formulario
+  //   if (id) {
+  //     // Agrega aquí la lógica para obtener los datos del servidor y establecer los valores iniciales de formik.setValues
+  //     // Puedes usar axios, fetch u otra biblioteca para hacer la solicitud HTTP
+  //     // Supongamos que getDataFromServer es una función que obtiene los datos del servidor
+  //     const fetchData = async () => {
+  //       try {
+  //         clienteAxios(`/api/hardware/${id}`, {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }).then((response) => {
+  //           setEquipo(response.data.hardware);
+  //           console.log(response.data.hardware);
+  //         });
+  //         // const data = await getDataFromServer(id);
+  //         // formik.setValues(data);
+  //       } catch (error) {
+  //         console.error("Error al obtener datos del servidor:", error);
+  //       }
+  //     };
+
+  //     fetchData();
+  //   }
+  // }, [id]);
   return (
     <>
       <main className="h-full">
@@ -134,13 +135,27 @@ function Software() {
           <div className="border w-full border-gray-200 bg-white py-4 px-6 rounded-md">
             <div className="flex justify-between pb-2">
               <Typography fontWeight={"bold"} variant={"h6"}>
-                Inventario Software
+                Lista de usuarios
               </Typography>
-              <Link to={"/software-nuevo"}>
-                <button className="bg-emerald-600 text-gray-100 px-3 py-2 rounded-lg shadow-lg text-sm">
-                  Nuevo
-                </button>
-              </Link>
+              <div className="flex justify-between gap-2">
+                {/* <button
+                  onClick={() => navigate(`/users`)}
+                  className="bg-orange-400 border-orange-600 text-gray-100 px-3 py-2 rounded-lg shadow-lg text-sm flex gap-2 items-center"
+                >
+                  <div>
+                    <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+                  </div>
+                  <span>Volver</span>
+                </button> */}
+                <Link to={`/new-user`}>
+                  <button className="bg-emerald-600 border-emerald-600 text-gray-100 px-3 py-2 rounded-lg shadow-lg text-sm flex gap-2 items-center">
+                    <div>
+                      <FontAwesomeIcon icon={faAdd} />
+                    </div>
+                    <span>Nuevo</span>
+                  </button>
+                </Link>
+              </div>
             </div>
 
             <div className="h-96">
@@ -162,15 +177,6 @@ function Software() {
                       pageSize: 10,
                     },
                   },
-                  columns: {
-                    columnVisibilityModel: {
-                      tipoLicencia: false,
-                      ubicacion: false,
-                      observacion: false,
-                      responsable: false,
-                      costoAdquisicion: false,
-                    },
-                  },
                 }}
               />
             </div>
@@ -181,4 +187,4 @@ function Software() {
   );
 }
 
-export default Software;
+export default Users;
