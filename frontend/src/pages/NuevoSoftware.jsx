@@ -42,7 +42,7 @@ function NewSoftware() {
       tipoLicencia: "",
       responsable: "",
       ubicacion: "",
-      observacion: "",
+      observacion: "ninguna",
       area_id: 1, // Valor por defecto para el select
       user_id: user?.id,
     },
@@ -414,7 +414,7 @@ function NewSoftware() {
                     onClick={formik.handleReset}
                     className="bg-red-600 text-gray-100 px-3 py-2 rounded-lg shadow-lg text-sm w-full "
                   >
-                    Cancelar
+                    Limpiar
                   </button>
                 </div>
               </div>

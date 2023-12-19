@@ -234,7 +234,7 @@ function NewMantenimiento() {
                     onClick={formik.handleReset}
                     className="bg-red-600 text-gray-100 px-3 py-2 rounded-lg shadow-lg text-sm w-full "
                   >
-                    Cancelar
+                    Limpiar
                   </button>
                 </div>
               </div>

@@ -19,14 +19,14 @@ const validationSchema = Yup.object().shape({
   tipo: Yup.string().required("Campo obligatorio"),
   marca: Yup.string().required("Campo obligatorio"),
   modelo: Yup.string().required("Campo obligatorio"),
-  descripcion: Yup.string().required("Campo obligatorio"),
+  descripcion: Yup.string(),
   fechaAdquisicion: Yup.date().required("Campo obligatorio"),
   costoAdquisicion: Yup.string().required("Campo obligatorio"),
   especificaciones: Yup.string().required("Campo obligatorio"),
   estado: Yup.string().required("Campo obligatorio"),
   so: Yup.string().required("Campo obligatorio"),
   fechaAsignacion: Yup.date().required("Campo obligatorio"),
-  fechaDevolucion: Yup.date().required("Campo obligatorio"),
+  fechaDevolucion: Yup.date(),
   responsable: Yup.string().required("Campo obligatorio"),
   ubicacion: Yup.string().required("Campo obligatorio"),
   observacion: Yup.string(),
@@ -647,7 +647,7 @@ function NewHardware() {
                     onClick={formik.handleReset}
                     className="bg-red-600 text-gray-100 px-3 py-2 rounded-lg shadow-lg text-sm w-full "
                   >
-                    Cancelar
+                    Limpiar
                   </button>
                 </div>
               </div>
