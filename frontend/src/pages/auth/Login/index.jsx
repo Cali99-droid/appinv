@@ -52,8 +52,8 @@ function LoginIndex() {
                   Ingrese con su cuenta
                 </h1>
                 <span className="text-sm">
-                  Sistema de inventario patrimonial de la Oficina General de
-                  Tecnologias de la Información
+                  Sistema de inventario de la Oficina General de Tecnologias de
+                  la Información, Sistemas y Estadística
                 </span>
               </div>
             </div>
@@ -84,7 +84,7 @@ function LoginIndex() {
 
               <div className="md:hidden block my-4">
                 <h1 className="text-2xl font-semibold">
-                  Sistema de inventario - OGITSE
+                  Sistema de inventario - OGTISE
                 </h1>
               </div>
 

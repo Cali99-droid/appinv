@@ -30,10 +30,17 @@ class SoftwareController extends Controller
         $software->fechaInstalacion = $request->input('fechaInstalacion');
         $software->tipoLicencia = $request->input('tipoLicencia');
         $software->ubicacion = $request->input('ubicacion');
-        $software->observacion = $request->input('observacion');
+        // $software->observacion = $request->input('observacion');
         $software->responsable = $request->input('responsable');
         $software->area_id = $request->input('area_id');
         $software->user_id = $request->input('user_id');
+
+
+        if ($request->observacion) {
+            $software->observacion = $request->input('observacion');
+        } else {
+            $software->observacion = 'ninguna';
+        }
         $software->save();
         return [
             'software' => $software,
